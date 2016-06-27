@@ -17,12 +17,6 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'org.dm.bundle'
 
-configurations {
-    compileAndPackage
-    compileAndPackage.transitive = true
-    compile.extendsFrom(compileAndPackage)
-}
-
 /*
  This build script uses 2 configurations including the new 'compileOnly' introduced in Grade 2.12
  
