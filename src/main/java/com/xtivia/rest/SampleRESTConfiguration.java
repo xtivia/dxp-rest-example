@@ -3,6 +3,10 @@
  * For now it doesn't really do anything other than provide an
  * example of how a rich configuration object can be defined
  * instead of simple strings.
+ * 
+ * To edit this configuration based on the definition below,
+ * use the Liferay Control Panel, navigate to System Settings,
+ * then Foundation, and select/search for 'Sample_REST_Configuration'
  */
 package com.xtivia.rest;
 
