@@ -2,22 +2,31 @@ package com.xtivia.rest;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.service.UserLocalService;
+
 
 /*
  * A sample application to demonstrate implementing a JAX-RS endpoint in DXP
  */
-@Component(immediate=true, property={"jaxrs.application=true"}, service=Application.class)
+@Component(immediate=true, 
+           service=Application.class,
+           configurationPid = "com.xtivia.rest.SampleRESTConfiguration",
+           configurationPolicy = ConfigurationPolicy.OPTIONAL,
+           property={"jaxrs.application=true"} 
+)
 public class SampleRESTApplication extends Application {
 	
 	/*
@@ -55,11 +64,24 @@ public class SampleRESTApplication extends Application {
 	
 	/*
 	 * This method demonstrates how you can perform logic when your bundle is activated/updated. For now we simply
-	 * print a message to the console--this is particularly useful during update-style deployments.
+	 * print a message to the console--this is particularly useful during update-style deployments. Note that this
+	 * method will also be invoked when the configuration changes.
 	 */
 	@Activate
 	@Modified
-	public void notifyWorld() {
+	public void activate(Map<String, Object> properties) {
+	
 		System.out.println("The sample DXP REST app has been activated/updated at " + new Date().toString());
+	
+		_sampleRESTConfiguration = ConfigurableUtil.createConfigurable(SampleRESTConfiguration.class, properties);
+		
+		if (_sampleRESTConfiguration != null) {
+			System.out.println("For sample DXP REST config, info="+_sampleRESTConfiguration.info());
+			System.out.println("For sample DXP REST config, infoNum="+_sampleRESTConfiguration.infoNum());
+		} else {
+			System.out.println("The sample DXP REST config object is not yet initialized");
+		}
 	}
+	
+	private SampleRESTConfiguration _sampleRESTConfiguration;
 }
