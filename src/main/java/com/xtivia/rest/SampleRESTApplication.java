@@ -17,7 +17,6 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.service.UserLocalService;
 
-
 /*
  * A sample application to demonstrate implementing a JAX-RS endpoint in DXP
  */
@@ -72,6 +71,10 @@ public class SampleRESTApplication extends Application {
 	public void activate(Map<String, Object> properties) {
 	
 		System.out.println("The sample DXP REST app has been activated/updated at " + new Date().toString());
+		
+		/*
+		 * Demonstrate updates to the configuration object for this bundle. 
+		 */
 	
 		_sampleRESTConfiguration = ConfigurableUtil.createConfigurable(SampleRESTConfiguration.class, properties);
 		

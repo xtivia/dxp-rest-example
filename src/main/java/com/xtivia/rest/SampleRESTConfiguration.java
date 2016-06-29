@@ -1,3 +1,9 @@
+/*
+ * A simple configuration object for this REST services bundle
+ * For now it doesn't really do anything other than provide an
+ * example of how a rich configuration object can be defined
+ * instead of simple strings.
+ */
 package com.xtivia.rest;
 
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
