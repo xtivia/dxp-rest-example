@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import org.osgi.service.component.annotations.Activate;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
            configurationPolicy = ConfigurationPolicy.OPTIONAL,
            property={"jaxrs.application=true"} 
 )
+@ApplicationPath("/samples")
 public class SampleRESTApplication extends Application {
 	
 	/*
@@ -62,9 +64,11 @@ public class SampleRESTApplication extends Application {
 	private UserLocalService _userLocalService;
 	
 	/*
-	 * This method demonstrates how you can perform logic when your bundle is activated/updated. For now we simply
-	 * print a message to the console--this is particularly useful during update-style deployments. Note that this
-	 * method will also be invoked when the configuration changes.
+	 * This method demonstrates how you can perform logic when your bundle is activated/updated. For simplicity's
+	 * sake we print a message to the console--this is particularly useful during update-style deployments. 
+	 * 
+	 * This method will also be invoked when the OSGi configuration changes for this bundle and we reflect that
+	 * by printing out the current value of our configuration object.
 	 */
 	@Activate
 	@Modified
