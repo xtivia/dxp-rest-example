@@ -53,6 +53,6 @@ If all of the steps above have been successfully executed you should now have ac
 
 ###Configuration
 
-This service also demonstrates how you can use the OSGi-based Configuration API to define/edit configuration parameters for your service (see https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/making-your-applications-configurable)
+This sample also demonstrates how you can use the OSGi-based Configuration API to define/edit configuration parameters for your service (see https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/making-your-applications-configurable)
 
-For example purposes this sample implements a configuration object with two parameters: a simple string and a simple integer. But what is exciting is that with the new Configuration support all we have to do is define a configuration interface and add a few annotations to our code, and presto, we have a working Configuration UI. Please reference the comments in the SampleRESTConfiguration.java file.|
+For example purposes this sample implements a configuration object with two parameters: a simple string and a simple integer. But what is exciting is that with the new Configuration support all we have to do is define a configuration interface and add a few annotations to our code, and presto, we have a working Configuration UI. Please reference the comments in the SampleRESTConfiguration.java file.
