@@ -20,8 +20,13 @@ import javax.ws.rs.core.Response;
 
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Path("/users")
+@Api(
+		description = "Liferay User object JAX RS access."
+)
 public class LiferayUserResource {
 	
 	SampleRESTApplication _app;
@@ -33,6 +38,9 @@ public class LiferayUserResource {
 	@GET
 	@Path("/current")
 	@Produces("application/json")
+	@ApiOperation(
+			value = "Returns a simplified JSON representation of Liferay User object for logged in user (or default user if not logged in)"
+	)
 	public LiferayUser getCurrentUser(@Context HttpServletRequest request) {
 		
 		/* NOTE: the JEE standard request.getRemoteUser() returns a string representation the numeric ID of the logged-in user.
