@@ -1,8 +1,5 @@
 package com.xtivia.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +24,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
  */
 
 @Path("/people")
-@Api(
-        description = "Memory managed list of resources describing a person."
-)
+
 public class PeopleResource {
 	
 	/*
@@ -55,9 +50,6 @@ public class PeopleResource {
 	// return all people
 	@GET
 	@Produces("application/json")
-    @ApiOperation(
-            value = "Returns the entire collection of in-memory Person objects"
-    )
 	public List<Person> getAllPeople() {
 		return __people;
 	}
@@ -66,9 +58,6 @@ public class PeopleResource {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-    @ApiOperation(
-            value = "Returns a single Person object based on suppplied ID"
-    )
 	public Response getPerson(@PathParam("id") String id) {
 		ResponseBuilder builder;
 		try {
@@ -89,9 +78,6 @@ public class PeopleResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-    @ApiOperation(
-            value = "Creates a new Person object based on suppplied JSON and returns the created object including ID"
-    )
 	public Person addPerson(Person newPerson) {
 		// generate a trivial ID based on epoch time
 		newPerson.id = new java.util.Date().getTime();
@@ -104,9 +90,6 @@ public class PeopleResource {
 	@Path("{id}")
 	@Consumes("application/json")
 	@Produces("application/json")
-    @ApiOperation(
-            value = "Modifies an existing Person object based on suppplied JSON and uses the ID parameter to identify the target person"
-    )
 	public Response updatePerson(Person newPerson, @PathParam("id") String id) {
 		  ResponseBuilder builder = null;
 		  Person oldPerson = findById(new Long(id));
@@ -125,10 +108,7 @@ public class PeopleResource {
    // delete a single person based on supplied ID
    @DELETE
    @Path("{id}")
-   @ApiOperation(
-           value = "Removes a single Person object based on suppplied ID"
-   )
-	public Response deletePerson(@PathParam("id") String id) {
+   public Response deletePerson(@PathParam("id") String id) {
 		ResponseBuilder builder =  Response.status(Response.Status.NOT_FOUND).entity("Person not found for ID: " + id);
 		long pid = new Long(id);
 		int ndx = 0;
