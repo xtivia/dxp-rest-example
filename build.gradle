@@ -1,10 +1,10 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.dm.gradle:gradle-bundle-plugin:0.8.5'
-    }
+  repositories {
+    mavenCentral() 
+  }
+  dependencies {
+    classpath 'biz.aQute.bnd:biz.aQute.bnd.gradle:+'
+  }
 }
 
 repositories {
@@ -15,7 +15,7 @@ repositories {
 }
 
 apply plugin: 'java'
-apply plugin: 'org.dm.bundle'
+apply plugin: 'biz.aQute.bnd.builder'
 
 /*
  This build script uses 2 configurations including the new 'compileOnly' introduced in Grade 2.12
@@ -61,15 +61,17 @@ def includeResource() {
   return list.join(',')
 }
 
-bundle {
-  instructions << [
-    'Bundle-Version'   : '1.0.0',
-    '-metatype'        : '*',
-    '-buildpath'       : 'osgi.annotation; version=6.0.1,osgi.core; version=6.0,osgi.cmpn; version=6.0',
-    'Export-Package'   : 'com.xtivia.rest',
-    'Import-Package'   : 'javax.servlet.http,javax.servlet,*',    
-    'Bundle-ClassPath' : bundleClassPath(),
-    '-includeresource' : includeResource(),
-    '-wab'             : ''
-  ]
+jar {
+    manifest {
+        attributes(
+		    'Bundle-Version'   : '1.0.0',
+		    '-metatype'        : '*',
+		    '-buildpath'       : 'osgi.annotation; version=6.0.1,osgi.core; version=6.0,osgi.cmpn; version=6.0',
+		    'Export-Package'   : 'com.xtivia.rest',
+		    'Import-Package'   : 'javax.servlet.http,javax.servlet,*',    
+		    'Bundle-ClassPath' : bundleClassPath(),
+		    '-includeresource' : includeResource(),
+            '-wab'             : ''
+		)
+    }
 }
